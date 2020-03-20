@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向数据绑定</title>
+</head>
+<body>
+<div id="app">
+    <p>{{message}}</p>
+    <input v-model="message">
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    //v-model:表单输入和应用之间的数据绑定
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'v-model使用'
+        }
+    })
+</script>
+</html>

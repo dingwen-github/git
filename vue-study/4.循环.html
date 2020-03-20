@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>循环</title>
+</head>
+<body>
+<div id="app">
+    <ol>
+        <li v-for="arr in arrs">
+            {{arr.text}}
+        </li>
+    </ol>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            arrs:[
+                {text:'学习JavaScript'},
+                {text:'学习Vue'},
+                {text:'整个牛项目'}
+            ]
+        }
+    })
+
+    //控制台： app.arrs.push({text:'添加新项目'})
+</script>
+</html>

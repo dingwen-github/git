@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化应用构建</title>
+</head>
+<body>
+<div id="app">
+    <ol>
+<!--        现在我们为每个todo-item提供一个todo对象，时动态的。需要提供key-->
+        <todo-item
+            v-for="item in groceryList"
+            v-bind:todo="item"
+            v-bind:id="item.id"
+        ></todo-item>
+    </ol>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    //定义名称为 todo-item 的新组件
+    Vue.component('todo-item',{
+        //prop:自定义attribute
+        props:['todo'],
+        template:'<li>{{todo.text}}</li>'
+    })
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            groceryList:[
+                {id:'0',text:'蔬菜'},
+                {id:'1',text:'奶酪'},
+                {id:'2',text:'黄焖鸡'}
+            ]
+        }
+    })
+</script>
+</html>

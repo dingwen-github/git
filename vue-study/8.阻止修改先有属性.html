@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阻止修改现有属性</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var obj = {
+        title:'vue is good'
+    }
+
+    //阻止修改现有属性
+    Object.freeze(obj);
+    var vm = new Vue({
+        el:'#app',
+        data:obj
+    })
+
+    vm.$data === data //true
+    vm.$el === document.getElementById('app')  //true
+
+    vm.$watch('title',function (newValue,oldValue) {
+        //这个回调函数将会在vm.title改变之后调用
+
+    })
+
+</script>
+</html>

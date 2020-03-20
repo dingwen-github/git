@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定元素</title>
+</head>
+<body>
+<div id="app">
+    <span v-bind:title="message">
+        鼠标悬停几秒钟查看此处动态绑定的信息！
+    </span>
+<!--    动态绑定数据：v-bind:attribute='变量名称'-->
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'页面加载于'+new Date().toLocaleString()
+        }
+    })
+</script>
+</html>

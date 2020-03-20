@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>处理用户输入</title>
+</head>
+<body>
+<div id="app">
+    <p>{{message}}</p>
+    <button v-on:click="reverseMessage">反转消息</button>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    //v-on 添加一个事件监听器
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'v-on:click添加事件监听器'
+        },
+        methods:{
+            reverseMessage:function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+</html>

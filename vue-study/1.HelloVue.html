@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Vue</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+<!--     v-once   一次性插值，不会改变-->
+        <span v-once>{{message}}</span>
+        <div v-html="message"></div>
+    </div>
+</body>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'<h1>Hello Vue</h1>'
+        }
+    })
+</script>
+</html>

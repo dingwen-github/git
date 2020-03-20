@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实例生命周期钩子</title>
+</head>
+<body>
+
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        data:{a:'1'},
+        //created钩子函数在实例被创建之后执行
+        created:function () {
+          //this指向vm实例
+            console.log('a is:'+this.a);
+        }
+    })
+
+   /* 不要在选项属性或回调上使用箭头函数
+    ，比如 created: () => console.log(this.a)
+    或 vm.$watch('a', newValue => this.myMethod())
+    。因为箭头函数并没有 this，this 会作为变量一直向上级词法作用域查找，直至找到为止，
+    经常导致 Uncaught TypeError: Cannot read property of undefined
+    或 Uncaught TypeError: this.myMethod is not a function 之类的错误。*/
+</script>
+</html>
