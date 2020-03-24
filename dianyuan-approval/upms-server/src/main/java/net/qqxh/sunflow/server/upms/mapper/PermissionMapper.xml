@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qqxh.sunflow.server.upms.mapper.PermissionMapper">
+    <resultMap type="net.qqxh.sunflow.server.upms.bean.Permission" id="permissionMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <collection property="roles" ofType="string">
+            <id column="roleCode" property="roleCode"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+    <!--        <id column="permissionId" property="permissionId"/>-->
+        </collection>
+    </resultMap>
+    <select id="listWithRoles" resultMap="permissionMap">
+                    select p.id,p.name,p.url,rp.role_code as roleCode,rp.permission_id as permissionId
+                    from supms_permission p left join supms_role_permission rp on rp.permission_id=p.id
+   </select>
+</mapper>

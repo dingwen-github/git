@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qqxh.sunflow.server.upms.mapper.RouterMapper">
+    <resultMap type="net.qqxh.sunflow.server.upms.bean.Router" id="routerMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="path" property="path"/>
+        <result column="parentId" property="parentId"/>
+        <result column="component" property="component"/>
+        <result column="title" property="title"/>
+        <result column="redirect" property="redirect"/>
+        <result column="icon" property="icon"/>
+        <result column="orders" property="orders"/>
+
+        <collection property="permissions" ofType="net.qqxh.sunflow.server.upms.bean.Permission">
+            <id column="ps_id" property="id"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+            <result column="ps_name" property="name"/>   <!-- property对应JavaBean中的属性名 -->
+            <result column="url" property="url"/>
+            <result column="parentRouter" property="parentRouter"/>
+        </collection>
+    </resultMap>
+    <select id="list" resultMap="routerMap">
+                    SELECT
+                        r.id,
+                        r.name,
+                        r.parentId,
+                        r.component,
+                        r.path,
+                        r.title,
+                        r.redirect,
+                        r.icon,
+                        r.orders,
+                        p.id ps_id,
+                        p.name ps_name,
+                        p.parentRouter,
+                        p.url
+                    FROM
+                        supms_router_info r
+                        LEFT JOIN supms_permission p ON p.parentRouter = r.id
+
+   </select>
+
+    <select id="listByRole" parameterType="collection"  resultType="net.qqxh.sunflow.server.upms.bean.Router">
+                     SELECT
+                        r.id,
+                        r.name,
+                        r.parentId,
+                        r.component,
+                        r.path,
+                        r.title,
+                        r.redirect,
+                        r.icon,
+                        r.orders
+                    FROM
+                    supms_router_info r
+                         JOIN (select DISTINCT  router_id as router_id from supms_role_router
+                        where role_code in
+
+                    <foreach collection="collection" open="(" separator="," close=")" item="val">
+                        '${val}'
+                    </foreach> )p
+                 ON p.router_id = r.id order by orders
+   </select>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qqxh.sunflow.server.flowexample.mapper.StudentApplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="net.qqxh.sunflow.server.flowexample.bean.StudentApply">
+        <id column="recordid" property="recordid" />
+        <result column="schoolname" property="schoolname" />
+        <result column="region" property="region" />
+        <result column="dateday" property="dateday" />
+        <result column="datetime" property="datetime" />
+        <result column="resource" property="resource" />
+        <result column="descript" property="descript" />
+        <result column="applyer" property="applyer" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        recordid, schoolname, region, dateday,applyer, datetime, bmtype, resource,descript
+    </sql>
+
+</mapper>

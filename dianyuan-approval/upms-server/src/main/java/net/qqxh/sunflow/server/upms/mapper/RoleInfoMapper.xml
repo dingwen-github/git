@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.qqxh.sunflow.server.upms.mapper.RoleInfoMapper" >
+  <resultMap id="BaseResultMap" type="net.qqxh.sunflow.server.upms.bean.RoleInfo" >
+    <id column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_TYPE" property="roleType" jdbcType="CHAR" />
+    <result column="UNIT_CODE" property="unitCode" jdbcType="VARCHAR" />
+    <result column="IS_VALID" property="isValid" jdbcType="CHAR" />
+    <result column="ROLE_DESC" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="update_Date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updator" property="updator" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="listRoleCodeByUser" parameterType="net.qqxh.sunflow.server.shiro.core.ShiroUser" resultType="String">
+    select w.role_code from supms_user_role w where  w.user_id=#{id}
+</select>
+    <select id="listRoutersByRole" parameterType="java.lang.String" resultType="String">
+        select w.router_id from supms_role_router w where  w.role_code=#{roleCode}
+    </select>
+    <select id="listPermissionByRole" parameterType="java.lang.String" resultType="String">
+        select w.permission_id from supms_role_permission w where  w.role_code=#{roleCode}
+    </select>
+</mapper>

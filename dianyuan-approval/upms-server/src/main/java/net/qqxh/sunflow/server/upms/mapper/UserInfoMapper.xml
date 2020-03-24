@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qqxh.sunflow.server.upms.mapper.UserInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="net.qqxh.sunflow.server.upms.bean.UserInfo">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="login_name" property="loginName" />
+        <result column="pwd" property="pwd" />
+        <result column="introduction" property="introduction" />
+        <result column="avatar" property="avatar" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, login_name, pwd, introduction, avatar
+    </sql>
+
+    <select id="findByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select id, name, login_name, pwd, introduction, avatar from supms_user_info where login_name=#{loginName}
+
+    </select>
+    <select id="checkLoginNameUnique" parameterType="net.qqxh.sunflow.server.upms.bean.UserInfo" resultType="int">
+		select count(1) from supms_user_info where login_name=#{loginName}
+		<if test="id!=null and id!=''">
+            and id !=#{id}
+        </if>
+
+
+	</select>
+</mapper>

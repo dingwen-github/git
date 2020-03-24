@@ -1,0 +1,35 @@
+INSERT INTO `supms_router_info` VALUES (1, '菜单管理', -1, 1, '/menu', '菜单管理', 'upms/menu/index', NULL, 'tree');
+INSERT INTO `supms_router_info` VALUES (2, '角色管理', -1, 2, '/role', '角色管理', 'upms/role/index', NULL, 'role');
+INSERT INTO `supms_router_info` VALUES (3, '用户管理', -1, 3, '/user', '用户管理', 'upms/userInfo/index', NULL, 'user');
+INSERT INTO `supms_router_info` VALUES (4, '技术栈', -1, 4, '/dependence', '技术栈', 'upms/dependence', NULL, 'jishu');
+INSERT INTO `supms_router_info` VALUES (6, '数据字典', -1, 6, '/dictionary', '数据字典', 'upms/dictionary/index', NULL, 'nested');
+INSERT INTO `supms_router_info` VALUES (7, '部门管理', -1, 7, '/dept', '部门管理', 'upms/dept/index', NULL, 'user');
+INSERT INTO `supms_router_info` VALUES (8, '流程部署管理', -1, 8, '/flow/deployment', '流程部署管理', 'bpmn/deployment/index', NULL, 'tree');
+INSERT INTO `supms_router_info` VALUES (9, '流程定义', -1, 9, '/flow/def', '流程定义', 'bpmn/definitions/index', NULL, 'tree');
+INSERT INTO `supms_router_info` VALUES (10, '任务管理', -1, 10, '/flow/tasks', '任务管理', 'bpmn/tasks/index', NULL, 'tree');
+INSERT INTO `supms_router_info` VALUES (11, '学生报名', -1, 11, '/flow/flowform', '学生报名', 'bpmn/flowform/studentApply', NULL, 'tree');
+INSERT INTO `supms_router_info` VALUES (12, '文档在线编辑', -1, 12, '/office', '文档在线编辑', 'onlyoffice/index', NULL, 'jishu');
+
+INSERT INTO `supms_permission` VALUES (1, '/role/all', '列表', 2);
+INSERT INTO `supms_user_role` VALUES (1, 'admin');
+INSERT INTO `supms_user_info` VALUES (1, '管理员', 'admin', 'admin', '系统管理员', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif');
+INSERT INTO `supms_role_info` VALUES ('admin', '管理员', '1', '1', 'T', '1', NULL, NULL, NULL, NULL);
+INSERT INTO `supms_role_router` VALUES (1, 'admin');
+INSERT INTO `supms_role_router` VALUES (2, 'admin');
+INSERT INTO `supms_role_router` VALUES (3, 'admin');
+INSERT INTO `supms_role_router` VALUES (4, 'admin');
+INSERT INTO `supms_role_router` VALUES (6, 'admin');
+INSERT INTO `supms_role_router` VALUES (7, 'admin');
+INSERT INTO `supms_role_router` VALUES (8, 'admin');
+INSERT INTO `supms_role_router` VALUES (9, 'admin');
+INSERT INTO `supms_role_router` VALUES (10, 'admin');
+INSERT INTO `supms_role_router` VALUES (11, 'admin');
+INSERT INTO `supms_role_router` VALUES (12, 'admin');
+INSERT INTO `supms_role_permission` VALUES ('admin', 1);
+
+INSERT INTO `supms_dictionary_catalog` VALUES ('CatalogStruct', '字典结构', 'L-列表  T-树形', 'S', 'L', '2019-05-25 23:18:56', '2019-05-26 11:36:04');
+INSERT INTO `supms_dictionary_catalog` VALUES ('CatalogType', '字典类型', 'S-系统  U-用户', 'S', 'L', '2019-05-25 23:16:33', '2019-05-26 11:36:29');
+INSERT INTO `supms_dictionary_detail` VALUES ('CatalogStruct', 'L', '列表', NULL, NULL, NULL, 1, '2019-05-25 23:20:54', '2019-05-25 23:20:54');
+INSERT INTO `supms_dictionary_detail` VALUES ('CatalogStruct', 'T', '树形', NULL, NULL, NULL, 2, '2019-05-25 23:21:05', '2019-05-25 23:21:05');
+INSERT INTO `supms_dictionary_detail` VALUES ('CatalogType', 'S', '系统', NULL, NULL, NULL, 1, '2019-05-25 23:17:06', '2019-05-25 23:17:20');
+INSERT INTO `supms_dictionary_detail` VALUES ('CatalogType', 'U', '用户', NULL, NULL, NULL, 2, '2019-05-25 23:16:52', '2019-05-25 23:17:15');

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qqxh.sunflow.server.dictionary.mapper.DictionaryCatalogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="net.qqxh.sunflow.server.dictionary.bean.DictionaryCatalog">
+        <id column="catalog_code" property="catalogCode" />
+        <result column="catalog_name" property="catalogName" />
+        <result column="catalog_desc" property="catalogDesc" />
+        <result column="catalog_type" property="catalogType" />
+        <result column="catalog_struct" property="catalogStruct" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        catalog_code, catalog_name, catalog_desc, catalog_type, catalog_struct, create_date, update_date
+    </sql>
+
+</mapper>

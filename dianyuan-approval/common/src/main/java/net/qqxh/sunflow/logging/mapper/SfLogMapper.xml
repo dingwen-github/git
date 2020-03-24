@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qqxh.sunflow.logging.mapper.SfLogMapper">
+
+    <!--&lt;!&ndash; 通用查询映射结果 &ndash;&gt;-->
+    <!--<resultMap id="BaseResultMap" type="net.qqxh.sunflow.logging.bean.SfLog">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="create_time" property="createTime"/>-->
+        <!--<result column="description" property="description"/>-->
+        <!--<result column="exception_detail" property="exceptionDetail"/>-->
+        <!--<result column="log_type" property="logType"/>-->
+        <!--<result column="method" property="method"/>-->
+        <!--<result column="params" property="params"/>-->
+        <!--<result column="request_ip" property="requestIp"/>-->
+        <!--<result column="time" property="time"/>-->
+        <!--<result column="username" property="username"/>-->
+    <!--</resultMap>-->
+
+    <!--&lt;!&ndash; 通用查询结果列 &ndash;&gt;-->
+    <!--<sql id="Base_Column_List">-->
+        <!--id, create_time, description, exception_detail, log_type, method, params, request_ip, time, username-->
+    <!--</sql>-->
+
+</mapper>

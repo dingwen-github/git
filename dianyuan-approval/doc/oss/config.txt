@@ -1,0 +1,9 @@
+#启动服务端命令
+minio server /data
+
+
+#mc客户端配置远程地址
+mc config host add minio http://127.0.0.1:9000 H64ONLT9GD0UGX2K8JF5 5GAdfHZPezD2ySG+yYyohou4PZOeq9ZAEOv7xOtF S3v2
+
+#mc客户端配置桶为公共
+mc policy public minio/upms  H64ONLT9GD0UGX2K8JF5 5GAdfHZPezD2ySG+yYyohou4PZOeq9ZAEOv7xOtF S3v2   http://127.0.0.1:9000/upms
