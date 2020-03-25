@@ -1,83 +1,90 @@
-'use strict';
+'use strict'
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject
 
+// eslint-disable-next-line one-var
 var domQuery = require('min-dom').query,
-    domClosest = require('min-dom').closest,
-    domify = require('min-dom').domify,
-    forEach = require('lodash/forEach');
+  domClosest = require('min-dom').closest,
+  domify = require('min-dom').domify,
+  forEach = require('lodash/forEach')
 
+// eslint-disable-next-line one-var
 var elementHelper = require('../../../../helper/ElementHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper'),
-    utils = require('../../../../Utils');
+  cmdHelper = require('../../../../helper/CmdHelper'),
+  utils = require('../../../../Utils')
 
 function getSelectBox(node, id) {
-  var currentTab = domClosest(node, 'div.bpp-properties-tab');
-  var query = 'select[name=selectedExtensionElement]' + (id ? '[id=cam-extensionElements-' + id + ']' : '');
-  return domQuery(query, currentTab);
+  var currentTab = domClosest(node, 'div.bpp-properties-tab')
+  var query = 'select[name=selectedExtensionElement]' + (id ? '[id=cam-extensionElements-' + id + ']' : '')
+  return domQuery(query, currentTab)
 }
 
 function getSelected(node, id) {
-  var selectBox = getSelectBox(node, id);
+  var selectBox = getSelectBox(node, id)
   return {
     value: (selectBox || {}).value,
     idx: (selectBox || {}).selectedIndex
-  };
+  }
 }
 
 function generateElementId(prefix) {
-  prefix = prefix + '_';
-  return utils.nextId(prefix);
+  prefix = prefix + '_'
+  return utils.nextId(prefix)
 }
 
+// eslint-disable-next-line one-var
 var CREATE_EXTENSION_ELEMENT_ACTION = 'create-extension-element',
-    REMOVE_EXTENSION_ELEMENT_ACTION = 'remove-extension-element';
+  REMOVE_EXTENSION_ELEMENT_ACTION = 'remove-extension-element'
 
 module.exports = function(element, bpmnFactory, options, translate) {
-
+  // eslint-disable-next-line one-var
   var id = options.id,
-      prefix = options.prefix || 'elem',
-      label = options.label || id,
-      idGeneration = (options.idGeneration === false) ? options.idGeneration : true,
-      businessObject = options.businessObject || getBusinessObject(element);
+    prefix = options.prefix || 'elem',
+    label = options.label || id,
+    idGeneration = (options.idGeneration === false) ? options.idGeneration : true,
+    businessObject = options.businessObject || getBusinessObject(element)
 
-  var modelProperty = options.modelProperty || 'id';
+  var modelProperty = options.modelProperty || 'id'
 
-  var getElements = options.getExtensionElements;
+  var getElements = options.getExtensionElements
 
+  // eslint-disable-next-line one-var
   var createElement = options.createExtensionElement,
-      canCreate = typeof createElement === 'function';
+    canCreate = typeof createElement === 'function'
 
+  // eslint-disable-next-line one-var
   var removeElement = options.removeExtensionElement,
-      canRemove = typeof removeElement === 'function';
+    canRemove = typeof removeElement === 'function'
 
-  var onSelectionChange = options.onSelectionChange;
+  var onSelectionChange = options.onSelectionChange
 
+  // eslint-disable-next-line one-var
   var hideElements = options.hideExtensionElements,
-      canBeHidden = typeof hideElements === 'function';
+    canBeHidden = typeof hideElements === 'function'
 
-  var setOptionLabelValue = options.setOptionLabelValue;
+  var setOptionLabelValue = options.setOptionLabelValue
 
+  // eslint-disable-next-line one-var
   var defaultSize = options.size || 5,
-      resizable = options.resizable;
+    resizable = options.resizable
 
-  var reference = options.reference || undefined;
+  var reference = options.reference || undefined
 
   var selectionChanged = function(element, node, event, scope) {
     if (typeof onSelectionChange === 'function') {
-      return onSelectionChange(element, node, event, scope);
+      return onSelectionChange(element, node, event, scope)
     }
-  };
+  }
 
   var createOption = function(value) {
-    return '<option value="' + value + '" data-value data-name="extensionElementValue">' + value + '</option>';
-  };
+    return '<option value="' + value + '" data-value data-name="extensionElementValue">' + value + '</option>'
+  }
 
   var initSelectionSize = function(selectBox, optionsLength) {
     if (resizable) {
-      selectBox.size = optionsLength > defaultSize ? optionsLength : defaultSize;
+      selectBox.size = optionsLength > defaultSize ? optionsLength : defaultSize
     }
-  };
+  }
 
   return {
     id: id,
@@ -106,129 +113,125 @@ module.exports = function(element, bpmnFactory, options, translate) {
           '</div>',
 
     get: function(element, node) {
-      var elements = getElements(element, node);
+      var elements = getElements(element, node)
 
-      var result = [];
+      var result = []
       forEach(elements, function(elem) {
         result.push({
           extensionElementValue: elem.get(modelProperty)
-        });
-      });
+        })
+      })
 
-      var selectBox = getSelectBox(node.parentNode, id);
-      initSelectionSize(selectBox, result.length);
+      var selectBox = getSelectBox(node.parentNode, id)
+      initSelectionSize(selectBox, result.length)
 
-      return result;
+      return result
     },
 
     set: function(element, values, node) {
-      var action = this.__action;
-      delete this.__action;
+      var action = this.__action
+      delete this.__action
 
-      businessObject = businessObject || getBusinessObject(element);
+      businessObject = businessObject || getBusinessObject(element)
 
       var bo =
         (reference && businessObject.get(reference))
           ? businessObject.get(reference)
-          : businessObject;
+          : businessObject
 
-      var extensionElements = bo.get('extensionElements');
+      var extensionElements = bo.get('extensionElements')
 
       if (action.id === CREATE_EXTENSION_ELEMENT_ACTION) {
-        var commands = [];
+        var commands = []
         if (!extensionElements) {
-          extensionElements = elementHelper.createElement('bpmn:ExtensionElements', { values: [] }, bo, bpmnFactory);
-          commands.push(cmdHelper.updateBusinessObject(element, bo, { extensionElements: extensionElements }));
+          extensionElements = elementHelper.createElement('bpmn:ExtensionElements', { values: [] }, bo, bpmnFactory)
+          commands.push(cmdHelper.updateBusinessObject(element, bo, { extensionElements: extensionElements }))
         }
-        commands.push(createElement(element, extensionElements, action.value, node));
-        return commands;
-
+        commands.push(createElement(element, extensionElements, action.value, node))
+        return commands
+      } else if (action.id === REMOVE_EXTENSION_ELEMENT_ACTION) {
+        return removeElement(element, extensionElements, action.value, action.idx, node)
       }
-      else if (action.id === REMOVE_EXTENSION_ELEMENT_ACTION) {
-        return removeElement(element, extensionElements, action.value, action.idx, node);
-      }
-
     },
 
     createListEntryTemplate: function(value, index, selectBox) {
-      initSelectionSize(selectBox, selectBox.options.length + 1);
-      return createOption(value.extensionElementValue);
+      initSelectionSize(selectBox, selectBox.options.length + 1)
+      return createOption(value.extensionElementValue)
     },
 
     deselect: function(element, node) {
-      var selectBox = getSelectBox(node, id);
-      selectBox.selectedIndex = -1;
+      var selectBox = getSelectBox(node, id)
+      selectBox.selectedIndex = -1
     },
 
     getSelected: function(element, node) {
-      return getSelected(node, id);
+      return getSelected(node, id)
     },
 
     setControlValue: function(element, node, option, property, value, idx) {
-      node.value = value;
+      node.value = value
 
       if (!setOptionLabelValue) {
-        node.text = value;
+        node.text = value
       } else {
-        setOptionLabelValue(element, node, option, property, value, idx);
+        setOptionLabelValue(element, node, option, property, value, idx)
       }
     },
 
     createElement: function(element, node) {
       // create option template
-      var generatedId;
+      var generatedId
       if (idGeneration) {
-        generatedId = generateElementId(prefix);
+        generatedId = generateElementId(prefix)
       }
 
-      var selectBox = getSelectBox(node, id);
-      var template = domify(createOption(generatedId));
+      var selectBox = getSelectBox(node, id)
+      var template = domify(createOption(generatedId))
 
       // add new empty option as last child element
-      selectBox.appendChild(template);
+      selectBox.appendChild(template)
 
       // select last child element
-      selectBox.lastChild.selected = 'selected';
-      selectionChanged(element, node);
+      selectBox.lastChild.selected = 'selected'
+      selectionChanged(element, node)
 
       // update select box size
-      initSelectionSize(selectBox, selectBox.options.length);
+      initSelectionSize(selectBox, selectBox.options.length)
 
       this.__action = {
         id: CREATE_EXTENSION_ELEMENT_ACTION,
         value: generatedId
-      };
+      }
 
-      return true;
+      return true
     },
 
     removeElement: function(element, node) {
-      var selection = getSelected(node, id);
+      var selection = getSelected(node, id)
 
-      var selectBox = getSelectBox(node, id);
-      selectBox.removeChild(selectBox.options[selection.idx]);
+      var selectBox = getSelectBox(node, id)
+      selectBox.removeChild(selectBox.options[selection.idx])
 
       // update select box size
-      initSelectionSize(selectBox, selectBox.options.length);
+      initSelectionSize(selectBox, selectBox.options.length)
 
       this.__action = {
         id: REMOVE_EXTENSION_ELEMENT_ACTION,
         value: selection.value,
         idx: selection.idx
-      };
+      }
 
-      return true;
+      return true
     },
 
     hideElements: function(element, entryNode, node, scopeNode) {
-      return !hideElements(element, entryNode, node, scopeNode);
+      return !hideElements(element, entryNode, node, scopeNode)
     },
 
     disableRemove: function(element, entryNode, node, scopeNode) {
-      return (getSelected(entryNode, id) || {}).idx < 0;
+      return (getSelected(entryNode, id) || {}).idx < 0
     },
 
     selectElement: selectionChanged
-  };
-
-};
+  }
+}

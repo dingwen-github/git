@@ -14,21 +14,20 @@ module.exports = function(element, bpmnFactory, options, translate) {
     modelProperty: 'taskPriority',
 
     get: function(element, node) {
-      var bo = getBusinessObject(element);
+      var bo = getBusinessObject(element)
       return {
         taskPriority: bo.get('camunda:taskPriority')
-      };
+      }
     },
 
     set: function(element, values) {
-      var bo = getBusinessObject(element);
+      var bo = getBusinessObject(element)
       return cmdHelper.updateBusinessObject(element, bo, {
         'camunda:taskPriority': values.taskPriority || undefined
-      });
+      })
     }
 
-  });
+  })
 
-  return [ externalTaskPriorityEntry ];
-
-};
+  return [ externalTaskPriorityEntry ]
+}

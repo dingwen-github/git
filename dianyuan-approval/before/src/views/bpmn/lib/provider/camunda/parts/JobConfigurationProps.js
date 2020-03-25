@@ -1,10 +1,12 @@
-'use strict';
+'use strict'
 
+// eslint-disable-next-line one-var
 var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+  getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
 
+// eslint-disable-next-line one-var
 var jobPriority = require('./implementation/JobPriority'),
-    jobRetryTimeCycle = require('./implementation/JobRetryTimeCycle');
+  jobRetryTimeCycle = require('./implementation/JobRetryTimeCycle');
 
 module.exports = function(group, element, bpmnFactory, translate) {
   var businessObject = getBusinessObject(element);
@@ -28,7 +30,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   if (is(element, 'camunda:AsyncCapable')) {
     group.entries = group.entries.concat(jobRetryTimeCycle(element, bpmnFactory, {
       getBusinessObject: getBusinessObject
-    }, translate));
+    }, translate))
   }
 
-};
+}
